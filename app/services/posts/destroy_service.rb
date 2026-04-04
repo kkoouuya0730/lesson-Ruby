@@ -7,8 +7,7 @@ module Posts
 
     # 一旦物理削除
     def call
-      post = @repository.find(@id)
-      @repository.destroy(post)
+      @repository.destroy(@id)
     end
   end
 end

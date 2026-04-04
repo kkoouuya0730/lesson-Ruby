@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    post = Posts::DestroyService.new(params[:id],).call
+    post = Posts::DestroyService.new(params[:id]).call
     head :no_content
   end
 
