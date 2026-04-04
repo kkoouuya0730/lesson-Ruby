@@ -15,27 +15,20 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
-    if @post.save
-      render json: @post, status: :created, location: @post
-    else
-      render json: @post.errors, status: :unprocessable_content
-    end
+    post = Posts::CreateService.new(post_params).call
+    render json: post, status: :created
   end
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
-      render json: @post
-    else
-      render json: @post.errors, status: :unprocessable_content
-    end
+    post = Posts::UpdateService.new(params[:id], post_params).call
+    render json: post
   end
 
   # DELETE /posts/1
   def destroy
-    @post.destroy!
+    post = Posts::DestroyService.new(params[:id],).call
+    head :no_content
   end
 
   private
