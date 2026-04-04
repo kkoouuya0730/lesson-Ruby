@@ -1,12 +1,12 @@
 module Posts
-  class CreateService
+  class IndexService
     def initialize(params, repository = Posts::PostRepository.new)
       @params = params
       @repository = repository
     end
 
     def call
-      @repository.create(@params)
+      @repository.list(@params)
     end
   end
 end

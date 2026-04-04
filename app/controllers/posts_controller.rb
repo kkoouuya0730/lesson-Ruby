@@ -3,9 +3,8 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
-
-    render json: @posts
+    posts = Posts::IndexService.new(post_params).call
+    render json: posts
   end
 
   # GET /posts/1
