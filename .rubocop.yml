@@ -12,6 +12,7 @@ Layout/IndentationStyle:
 
 Layout/IndentationWidth:
   Enabled: true
+  EnforcedStyleAlignWith: start_of_line
 
 Layout/IndentationConsistency:
   Enabled: true
