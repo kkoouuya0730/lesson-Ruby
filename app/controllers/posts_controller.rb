@@ -1,15 +1,16 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show update destroy ]
-
+  before_action :set_post
+  
   # GET /posts
   def index
-    posts = Posts::IndexService.new(post_params).call
+    posts = Posts::IndexService.new(index_params).call
     render json: posts
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    post = Posts::ShowService.new(params[:id]).call
+    render json: post
   end
 
   # POST /posts
@@ -39,5 +40,9 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.expect(post: [ :title, :body ])
+    end
+
+    def index_params
+      params.permit(:user_id, :keyword)
     end
 end
