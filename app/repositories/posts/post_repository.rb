@@ -10,7 +10,7 @@ module Posts
       if params[:keyword]
         scope = scope.where("title LIKE ?", "%#{params[:keyword]}%")
       end
-      
+
       scope = scope.order(created_at: :desc)
 
       scope

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post
-  
+
   # GET /posts
   def index
     posts = Posts::IndexService.new(index_params).call
