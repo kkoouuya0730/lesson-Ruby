@@ -12,3 +12,9 @@ class ApplicationController < ActionController::API
     head :not_found
   end
 end
+
+class Test
+  def hello
+    puts "hi"
+  end
+end
