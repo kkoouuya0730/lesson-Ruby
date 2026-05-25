@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  before_action :set_post
-
   # GET /posts
   def index
     result = Posts::IndexService.new(index_params).call
@@ -38,7 +36,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    post = Posts::DestroyService.new(params[:id]).call
+    Posts::DestroyService.new(params[:id]).call
     head :no_content
   end
 
