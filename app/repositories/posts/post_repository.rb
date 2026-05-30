@@ -5,15 +5,12 @@ module Posts
 
       scope = filter_by_user(scope, params[:user_id])
       scope = filter_by_keyword(scope, params[:keyword])
-
-      total_count = scope.count
-
       scope = apply_sort(scope, params[:sort])
       scope = paginate(scope, params[:page], params[:per_page])
 
       {
         items: scope,
-        total_count: total_count
+        total_count: scope.count
       }
     end
 
@@ -37,7 +34,7 @@ module Posts
     end
 
     private
-    def filter_by_keyword(scope, keyword)
+    def filter_by_user(scope, user_id)
       return scope if user_id.blank?
       scope.where(user_id: user_id)
     end
@@ -50,7 +47,7 @@ module Posts
     def apply_sort(scope, sort)
       case sort
       when "created_at_desc"
-        scope.order(created_at: :asc)
+        scope.order(created_at: :desc)
       when "title_asc"
         scope.order(title: :asc)
       when "title_desc"
