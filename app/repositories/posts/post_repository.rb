@@ -3,14 +3,15 @@ module Posts
     def list(params)
       scope = Post.all
 
-      scope = filter_by_user(scope, params[:user_id])
+      # scope = filter_by_user(scope, params[:user_id])
       scope = filter_by_keyword(scope, params[:keyword])
+      total_count = scope.count
       scope = apply_sort(scope, params[:sort])
       scope = paginate(scope, params[:page], params[:per_page])
 
       {
         items: scope,
-        total_count: scope.count
+        total_count: total_count
       }
     end
 
@@ -34,10 +35,10 @@ module Posts
     end
 
     private
-    def filter_by_user(scope, user_id)
-      return scope if user_id.blank?
-      scope.where(user_id: user_id)
-    end
+    # def filter_by_user(scope, user_id)
+    #   return scope if user_id.blank?
+    #   scope.where(user_id: user_id)
+    # end
 
     def filter_by_keyword(scope, keyword)
       return scope if keyword.blank?
@@ -46,6 +47,8 @@ module Posts
 
     def apply_sort(scope, sort)
       case sort
+      when "created_at_asc"
+        scope.order(created_at: :asc)
       when "created_at_desc"
         scope.order(created_at: :desc)
       when "title_asc"
