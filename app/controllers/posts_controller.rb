@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     result = Posts::IndexService.new(index_params).call
 
     page = index_params[:page].to_i > 0 ? index_params[:page].to_i : 1
-    per_page = index_params[:page].to_i > 0 ? index_params[:page].to_i : 20
+    per_page = index_params[:per_page].to_i > 0 ? index_params[:per_page].to_i : 20
     render json: {
       items: result[:items],
       meta: {
